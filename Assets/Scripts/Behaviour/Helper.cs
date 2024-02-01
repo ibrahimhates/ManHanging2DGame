@@ -16,7 +16,7 @@ namespace Behaviour
         // 6 şehir
         private static List<string> categoryWord = new()
         {
-            "isim", "yılın ayları", "mevsim", "hayvan", "meyve", "meyve", "eşya", "şehir"
+            "isim", "yılın ayları", "mevsim", "hayvan", "meyve", "eşya", "şehir"
         };
 
         private static List<string>[] wordList = new[]
@@ -136,16 +136,21 @@ namespace Behaviour
             List<string> randomList = new List<string>();
             List<string> categoryRandom = new List<string>();
 
-            for (int i = 0; i < 5; i++)
+            int randomCategoryIndex = random.Next(0, wordList.Length);
+            if (wordList[randomCategoryIndex].Any())
             {
-                int randomCategoryIndex = random.Next(0, wordList.Length);
-                int randomWordIndex = random.Next(0, wordList[randomCategoryIndex].Count);
-                randomList.Add(wordList[randomCategoryIndex][randomWordIndex]);
-                wordList[randomCategoryIndex].RemoveAt(randomWordIndex);
-                categoryRandom.Add(categoryWord[randomCategoryIndex]);
+                for (int i = 0; i < 5; i++)
+                {
+                    int randomWordIndex = random.Next(0, wordList[randomCategoryIndex].Count);
+                    randomList.Add(wordList[randomCategoryIndex][randomWordIndex]);
+                    wordList[randomCategoryIndex].RemoveAt(randomWordIndex);
+                    categoryRandom.Add(categoryWord[randomCategoryIndex]);
+                }
+                
+                return (categoryRandom, randomList);
             }
 
-            return (categoryRandom, randomList);
+            return GetRandomWord();
         }
     }
 }

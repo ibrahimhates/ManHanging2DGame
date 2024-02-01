@@ -17,7 +17,7 @@ public class ManHanging : MonoBehaviour
     public GameObject _panelWon;
     public GameObject HangingMan;
     public GameObject GameOverHangingMan;
-    public IDictionary<int, string> letterStore;
+    private IDictionary<int, string> letterStore;
     private string Word = "";
     private int failCount = 0;
     private int wordCount = 0;
