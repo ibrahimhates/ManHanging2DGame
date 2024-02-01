@@ -136,21 +136,22 @@ namespace Behaviour
             List<string> randomList = new List<string>();
             List<string> categoryRandom = new List<string>();
 
-            int randomCategoryIndex = random.Next(0, wordList.Length);
-            if (wordList[randomCategoryIndex].Any())
+
+            for (int i = 0; i < 5; i++)
             {
-                for (int i = 0; i < 5; i++)
+                int randomCategoryIndex = random.Next(0, wordList.Length);
+                if (!wordList[randomCategoryIndex].Any())
                 {
-                    int randomWordIndex = random.Next(0, wordList[randomCategoryIndex].Count);
-                    randomList.Add(wordList[randomCategoryIndex][randomWordIndex]);
-                    wordList[randomCategoryIndex].RemoveAt(randomWordIndex);
-                    categoryRandom.Add(categoryWord[randomCategoryIndex]);
+                    i--;
+                    continue;
                 }
-                
-                return (categoryRandom, randomList);
+                int randomWordIndex = random.Next(0, wordList[randomCategoryIndex].Count);
+                randomList.Add(wordList[randomCategoryIndex][randomWordIndex]);
+                wordList[randomCategoryIndex].RemoveAt(randomWordIndex);
+                categoryRandom.Add(categoryWord[randomCategoryIndex]);
             }
 
-            return GetRandomWord();
+            return (categoryRandom, randomList);
         }
     }
 }
